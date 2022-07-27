@@ -28,10 +28,13 @@ public class RegionsDAO {
 			int id = rs.getInt("region_id");
 			String name = rs.getString("region_name");
 			
-			System.out.println(id);
-			System.out.println(name);
+			outString(id, name);
 		}
 		
+	}
+	
+	private void outString(int id, String name) {
+		System.out.println("대륙코드 : " + id + "  대륙명 : " + name);
 	}
 
 }
