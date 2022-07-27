@@ -8,7 +8,7 @@ public class TestMain {
 		
 		DBConnector dbConnector = new DBConnector();
 		try {
-			dbConnector.getConnection();
+			DBConnector.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
