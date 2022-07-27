@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import kr.co.countries.CountriesDAO;
 import kr.co.countries.CountriesDTO;
 import kr.co.countries.CountriesView;
+import kr.co.employees.EmployeesDAO;
+import kr.co.employees.EmployeesDTO;
+import kr.co.employees.EmployeesView;
 import kr.co.regions.RegionsDAO;
 import kr.co.regions.RegionsDTO;
 import kr.co.regions.RegionsView;
@@ -18,6 +21,9 @@ public class TestMain {
 		RegionsView regionsView = new RegionsView();
 		CountriesView countriesView = new CountriesView();
 		
+		EmployeesDAO employeesDAO = new EmployeesDAO();
+		EmployeesView employeesView = new EmployeesView();
+		
 		try {
 			//regionsDAO.getList();
 			//countriesDAO.getList();
@@ -28,9 +34,14 @@ public class TestMain {
 			ArrayList<RegionsDTO> regionsResults = regionsDAO.getList();
 			regionsView.view(regionsResults);*/
 			
-			countriesView.view(countriesDAO.getDetail("US"));
+			/*countriesView.view(countriesDAO.getDetail("US"));
 			ArrayList<CountriesDTO> countriesResults = countriesDAO.getList();
-			countriesView.view(countriesResults);
+			countriesView.view(countriesResults);*/
+			
+			employeesView.view(employeesDAO.getDetail(102));
+			System.out.println();
+			ArrayList<EmployeesDTO> employeesResults = employeesDAO.getList();
+			employeesView.view(employeesResults);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
