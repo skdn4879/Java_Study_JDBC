@@ -1,14 +1,15 @@
 package kr.co.test;
 
+import kr.co.regions.RegionsDAO;
 import kr.co.util.DBConnector;
 
 public class TestMain {
 
 	public static void main(String[] args) {
 		
-		DBConnector dbConnector = new DBConnector();
+		RegionsDAO regionsDAO = new RegionsDAO();
 		try {
-			DBConnector.getConnection();
+			regionsDAO.getList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
