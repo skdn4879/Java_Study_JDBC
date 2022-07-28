@@ -30,18 +30,36 @@ public class TestMain {
 			//regionsDAO.getDetail(3);
 			//countriesDAO.getDetail("US");
 			
-			/*regionsView.view(regionsDAO.getDetail(3));
-			ArrayList<RegionsDTO> regionsResults = regionsDAO.getList();
+			//regionsView.view(regionsDAO.getDetail(3));
+			/*ArrayList<RegionsDTO> regionsResults = regionsDAO.getList();
 			regionsView.view(regionsResults);*/
 			
 			/*countriesView.view(countriesDAO.getDetail("US"));
 			ArrayList<CountriesDTO> countriesResults = countriesDAO.getList();
 			countriesView.view(countriesResults);*/
 			
-			employeesView.view(employeesDAO.getDetail(102));
+			/*String search = "%" + "U" + "%";
+			countriesDAO.getList(search);*/
+			// 애초에 전처리 후 넣어줘도 된다.
+			
+			/*employeesView.view(employeesDAO.getDetail(102));
 			System.out.println();
 			ArrayList<EmployeesDTO> employeesResults = employeesDAO.getList();
-			employeesView.view(employeesResults);
+			employeesView.view(employeesResults);*/
+			
+			//employeesDAO.getSalaryInfo();
+			
+			//RegionsDTO regionsDTO = new RegionsDTO(6, "East Asia");
+			//int result = regionsDAO.setRegion(regionsDTO);
+			
+			CountriesDTO countriesDTO = new CountriesDTO("MG", "Mongol", 6);
+			int result = countriesDAO.setCountry(countriesDTO);
+			
+			if(result > 0) {
+				System.out.println("성공");
+			} else {
+				System.out.println("실패");
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
