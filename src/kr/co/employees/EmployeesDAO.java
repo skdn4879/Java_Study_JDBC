@@ -10,6 +10,45 @@ import kr.co.util.DBConnector;
 
 public class EmployeesDAO {
 	
+	public void getJoinTest(EmployeesDTO employeesDTO) throws Exception {
+		//1. DB 연결
+		Connection con = DBConnector.getConnection();
+		
+		//2. Query문 작성 (Query가 길 경우 내려줄 수 있는데 띄어쓰기 신경쓸것, StringBuffer 사용해도 무관)
+		String sql = "SELECT E.first_name, E.salary, D.department_name "
+				+ "    FROM employees E "
+				+ "        INNER JOIN departments D "
+				+ "        ON (E.department_id = D.department_id) "
+				+ "    WHERE E.employee_id = ?";
+		
+		//3. Query문 미리 전송
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		//4. ?가 있으면 값 세팅
+		st.setInt(1, employeesDTO.getEmployee_id());
+		
+		//5. 최종 전송 후 결과 처리
+		ResultSet rs = st.executeQuery();
+		
+		if(rs.next()) {
+			employeesDTO = new EmployeesDTO();
+			employeesDTO.setFirst_name(rs.getString("E.first_name"));
+			employeesDTO.setSalary(rs.getInt("E.salary"));
+			// JOIN하면서 여러 테이블에서 값을 가져오므로 하나의 DTO에 모든 정보를 담을 수 없다. (서로 다른 DTO의 멤버가 필요함)
+			// 그렇다고 DTO를 또 생성하기에도 그렇다. -> 상속을 받거나 멤버로 선언
+			// employee는 department이다. -> x (employee는 department를 상속 x)
+			// employee는 department를 가지고 있다. -> 애매함 (employee는 department를 멤버로 가지지 않는다.)
+			// department는 employee이다. -> x
+			// department는 employee를 가지고 있다. -> 애매함
+			// department는 employee들을 가지고 있다. -> 정확함 (즉, departmentDTO의 멤버로 employee타입 ArrayList를 선언하는 것이 제일 적합)
+			// 물론 각자 따로 각각에 맞는 DTO에 담을 수도 있지만 반환하는 것이 좀 문제이다. -> 협의 후 결정
+		}
+		
+		//6. 자원해제
+		DBConnector.disConnect(rs, st, con);
+		
+	}
+	
 	public void getSalaryInfo() throws Exception {
 		//1. DB연결
 		Connection con = DBConnector.getConnection();
